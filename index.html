@@ -302,75 +302,15 @@
 
       
         
-          
-            <img src="/2018/05/07/Blog搭建/415360.jpg">
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>此文记录第一次使用GitHub &amp; Hexo 搭建个人Blog，及其中遇到的坑</p>
-<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ol>
-<li><p>准备搭建环境  </p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node.js  </span><br><span class="line">git　(搭建出现问题，此方法待解决ing)  </span><br><span class="line">github  </span><br><span class="line">github desktp</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装并初始化Hexo</p>
-</li>
-<li>将 Hexo与GitHub Page联系起来（通过https:,而非ssh，此问题未解决）</li>
-<li>发布文章</li>
-</ol>
-<h1 id="准备搭建环境"><a href="#准备搭建环境" class="headerlink" title="准备搭建环境"></a>准备搭建环境</h1><h2 id="1-node-js安装"><a href="#1-node-js安装" class="headerlink" title="1. node.js安装"></a>1. node.js安装</h2><ul>
-<li>下载地址：<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js</a>  </li>
-<li>直接安装，不需要改动  </li>
-<li>检查安装成功与否：<code>win+R</code>，<code>cmd</code> 命令行，输入 <code>node -v</code> ,若提示版本号，则成功</li>
-</ul>
-<h2 id="2-Git安装"><a href="#2-Git安装" class="headerlink" title="2. Git安装"></a>2. Git安装</h2><ul>
-<li>下载地址:<a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>  </li>
-<li>直接安装，不需要改动</li>
-<li>检查安装成功与否：在Git bash，命令框中输入<code>git --verdion</code> ,弹出版本号则成功</li>
-</ul>
-<h2 id="3-GitHub账号设置"><a href="#3-GitHub账号设置" class="headerlink" title="3. GitHub账号设置"></a>3. GitHub账号设置</h2><ul>
-<li>首先要有一个账号  </li>
-<li>创建New respository (即创建一个仓库。注：此库名字要与账号用户名相同Lzy7659.github.io)  </li>
-<li>setting 中找到 GitHub page，选择master branch  </li>
-<li>可通过choose a theme ，选择一个主题<br><strong>到此已经拥有了[用户名].github.io的网址</strong></li>
-</ul>
-<h2 id="4-安装Hexo"><a href="#4-安装Hexo" class="headerlink" title="4. 安装Hexo"></a>4. 安装Hexo</h2><ul>
-<li>cmd到MyBlog文件夹下(也可以直接Powershell打开)  </li>
-<li>命令行输入<code>npm install hexo-cli -g</code> 等待安装(忽略warn即可)  </li>
-<li>继续输入<code>npm install hexo --save</code>  同上  </li>
-<li>检验安装是否成功，输入<code>hexo -v</code> 出现版本号即可</li>
-</ul>
-<h2 id="5-配置hexo"><a href="#5-配置hexo" class="headerlink" title="5. 配置hexo"></a>5. 配置hexo</h2><ul>
-<li>继续在此文件夹下，输入<code>hexo init</code> ,若出现失败提示：文件夹不为空，可删除文件夹下所有文件后继续下载，也可以下载到空文件夹下再剪切过来  </li>
-<li>出现start blogging with hexo 字样则代表成功  </li>
-<li>安装插件：输入<code>npm install</code></li>
-</ul>
-<h2 id="6-体验hexo"><a href="#6-体验hexo" class="headerlink" title="6. 体验hexo"></a>6. 体验hexo</h2><ul>
-<li>输入：<code>hexo g</code>   </li>
-<li>输入：<code>hexo s</code></li>
-<li>将生成的：<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 输入浏览器就可以本地查看</li>
-</ul>
-<h2 id="7-将hexo与github-pages联系起来-重点"><a href="#7-将hexo与github-pages联系起来-重点" class="headerlink" title="7.将hexo与github pages联系起来(重点)"></a>7.将hexo与github pages联系起来(重点)</h2><ul>
-<li><p>配置git相关信息<br><code>$ git config --global user.name  &quot;用户名&quot;</code><br><code>$ git config --global user.email &quot;邮箱&quot;</code>  </p>
-</li>
-<li><p>将本地git与远程github联系起来</p>
-</li>
-<li>生成ssh密钥：打开git bush，输入<code>cd ~/.ssh</code>检查本机密钥，若提示No such file er directory 则需要创建</li>
-<li>创建密钥：输入<code>ssh-keygen -t rsa -C &quot;邮箱地址@email.com&quot;</code></li>
-<li>接下来如不需密码，三次回车即可</li>
-<li>将ssh key 添加到github中  </li>
-<li>打开C:\Users\用户名.ssh，将id_rsa.pub中的公钥全部复制，到github的settings中，创建new key，保存即可</li>
-<li>检查成功与否，输入<code>ssh -T git@github.com</code>若提示欢迎即为成功<br><strong>在此步出现问题，ssh始终无法连接成功</strong>  </li>
-<li><p>将MyBlog文件夹中_config中</p>
-  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  	<span class="built_in">type</span>: git</span><br><span class="line">  	repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">  	branch: master</span><br></pre></td></tr></table></figure>
-<p>改为  </p>
-  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  	<span class="built_in">type</span>:git  </span><br><span class="line">  	repo:https://github.com/Lzy7659/Lzy7659.github.io.git  </span><br><span class="line">  	branch: master</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="8-发布文章"><a href="#8-发布文章" class="headerlink" title="8.发布文章"></a>8.发布文章</h2><ul>
-<li>MyBlog中打开命令行，输入：<code>hexo new &quot;article title&quot;</code></li>
-<li>生成部署之前需要安装扩展，输入：<code>npm install hexo-deployer-git --save</code> </li>
-<li>继续命令行输入  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g //生成</span><br><span class="line">hexo d //部署</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=28285910&auto=1&height=66"></iframe>
-          
+          <img src="/2018/05/07/Blog搭建/415360.jpg">
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>此文记录第一次使用GitHub &amp; Hexo 搭建个人Blog，及其中遇到的坑<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/07/Blog搭建/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -607,18 +547,14 @@
 
       
         
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/06/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
